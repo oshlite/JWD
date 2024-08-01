@@ -1,8 +1,8 @@
 {
   "scripts": {
     "dev": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch",
-    "format: check" : "prettier --check --ignore-unknown.",
-    "format": "prettier --write --ignore-unknown."
+    "format: check": "prettier --check --ignore-unknown .",
+    "format": "prettier --write --ignore-unknown ."
   },
   "devDependencies": {
     "prettier": "^3.3.3",
