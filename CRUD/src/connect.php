@@ -8,9 +8,7 @@
      * */
     $con = new mysqli('localhost', 'root', '', 'CRUD');
 
-    // Checking connection
     if (!$con) {
-        // Connection Failed
         die(mysqli_error($con));
     }
 ?>

@@ -1,5 +1,5 @@
 <?php
-  require 'connect.php';
+require 'connect.php';
 ?>
 
 <!doctype html>
@@ -7,19 +7,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CRUD</title>
+    <title>CRUD:Read</title>
     <link rel="stylesheet" href="./output.css" />
+    <link rel="stylesheet" href="./style.css"/>
   </head>
   <body>
-    <h2>Tabel</h2>
+    <h2>Tabel Mahasiswa</h2>
     <table>
       <tr>
+        <th>id</th>
         <th>NPM</th>
         <th>Nama</th>
         <th>Jenis Kelamin</th>
         <th>Tanggal Lahir</th>
         <th>Alamat</th>
         <th>Foto</th>
+        <th>Update/Delete</th>
       </tr>
       <?php
         $sql = "SELECT id, npm, name, JenisKelamin, tanggallahir, alamat, foto FROM `mahasiswa`";
@@ -51,7 +54,7 @@
             echo '<td> <img src="'.$foto.'" width="240" height="240"> </td>'.
             '<td>
             <button><a href="update.php?userId='.$id.'">Update</a></button>
-            <button><a href="delete.php?userId='.$id.'">Delete</a></button>
+            <button><a href="delete.php?userId='.$id.'">DELETE</a></button>
             </td>'.
             '</tr>';
           }

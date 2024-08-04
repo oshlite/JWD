@@ -2,12 +2,10 @@
   require 'connect.php';
 
   function generateRandomString($length = 10) {
-    // Karakter yang dapat digunakan
     $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);
     $randomString = '';
     
-    // Menghasilkan string acak
     for ($i = 0; $i < $length; $i++) {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
@@ -27,7 +25,6 @@
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-    // Check if image file is a actual image or fake image
     if(isset($_POST["submit"])) {
       $check = getimagesize($_FILES["foto"]["tmp_name"]);
       if($check !== false) {
@@ -39,29 +36,24 @@
       }
     }
 
-    // Check if file already exists
     if (file_exists($target_file)) {
       echo "Sorry, file already exists.";
       $uploadOk = 0;
     }
 
-    // Check file size
     if ($_FILES["foto"]["size"] > 500000) {
       echo "Sorry, your file is too large.";
       $uploadOk = 0;
     }
 
-    // Allow certain file formats
     if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
     && $imageFileType != "gif" ) {
       echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
       $uploadOk = 0;
     }
 
-    // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
       echo "Sorry, your file was not uploaded.";
-    // if everything is ok, try to upload file
     } else {
       if (move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)) {
         echo "The file ". htmlspecialchars( basename( $_FILES["foto"]["name"])). " has been uploaded.";
@@ -70,11 +62,10 @@
       }
     }
 
-    $sql = "INSERT INTO `mahasiswa` (npm,name,JenisKelamin,tanggallahir,alamat,foto) VALUES('$npm','$name', '$JenisKelamin', '$tanggallahir', '$alamat','$target_file')";
+    $sql = "INSERT INTO `mahasiswa` (npm, name, JenisKelamin, tanggallahir, alamat, foto) VALUES ('$npm', '$name', '$JenisKelamin', '$tanggallahir', '$alamat', '$target_file')";
     $result = mysqli_query($con, $sql);
 
     if ($result) {
-        // echo 'Data inserted successfully';
         header('location:index.php');
     }
   }
@@ -84,7 +75,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CRUD</title>
+    <title>CRUD:Create</title>
     <link rel="stylesheet" href="./output.css" />
   </head>
   <body class="flex min-h-screen items-center justify-center bg-gray-100">
@@ -93,7 +84,7 @@
       enctype="multipart/form-data"
       class="w-full max-w-md rounded bg-white p-8 shadow-md"
     >
-      <h2 class="mb-6 text-center text-2xl font-bold">Form Data</h2>
+      <h2 class="mb-6 text-center text-2xl font-bold">Form Data Mahasiswa</h2>
 
       <div class="mb-4">
         <label for="npm" class="mb-2 block font-medium text-gray-700"
@@ -116,14 +107,14 @@
           >Nama</label
         >
         <input
-          type="text"
-          id="name"
-          name="name"
-          minlength="5"
-          maxlength="128"
-          pattern="[A-Za-z]+"
-          required
-          class="w-full rounded border border-gray-300 px-3 py-2"
+        type="text"
+        id="name"
+        name="name"
+        minlength="5"
+        maxlength="128"
+        pattern="[A-Za-z\s]+"
+        required
+        class="w-full rounded border border-gray-300 px-3 py-2"
         />
       </div>
 
